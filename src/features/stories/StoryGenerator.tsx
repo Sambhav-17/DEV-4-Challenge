@@ -88,6 +88,24 @@ export const StoryGenerator: React.FC<StoryGeneratorProps> = ({ onStorySaved, on
     }
   };
 
+  const handleSummonArchiveFallback = () => {
+    setIsGenerating(true);
+    setErrorMessage(null);
+    soundscape.playVeilBell();
+    setTimeout(() => {
+      const settingWord = options.setting.split(' ')[1] || 'Shadow';
+      const inspiration = options.inspirationText || 'a silver locket found beneath cold floorboards';
+      const fallbackStory = `The silence of the ${options.setting} is broken only by the cold ticking of memory.\n\nIt was here that ${inspiration} first surfaced into the twilight. Shadows lengthened not with malice, but with the quiet dignity of things that once were loved. Across the quiet threshold, every breath of wind carried the cadence of footsteps that once walked with purpose; every wisp of mist held the shape of a promise that outlived the flesh.\n\nWhen night settles at last over the Veil, one discovers the gentle truth of the machine: ghosts are never monsters. They are human memories that loved this world too much to turn away.`;
+
+      setStoryTitle(`The Echo of the ${settingWord.charAt(0).toUpperCase() + settingWord.slice(1)}`);
+      setGeneratedStory(fallbackStory);
+      setModelSource('archive_sanctuary');
+      setModelName('Veil Memorial Vault (Autonomous Sanctuary)');
+      setSaved(false);
+      setIsGenerating(false);
+    }, 700);
+  };
+
   const handleCopy = () => {
     if (!generatedStory) return;
     navigator.clipboard.writeText(`${storyTitle}\n\n${generatedStory}`);
@@ -314,6 +332,13 @@ export const StoryGenerator: React.FC<StoryGeneratorProps> = ({ onStorySaved, on
                     className="text-xs text-[#D7AD63] underline hover:text-[#e4be78] block font-mono cursor-pointer"
                   >
                     Open Open-Source AI Lab to inspect Ollama / model config →
+                  </button>
+                  <button
+                    onClick={handleSummonArchiveFallback}
+                    className="mt-2 inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#D7AD63]/20 hover:bg-[#D7AD63]/30 text-[#D7AD63] border border-[#D7AD63]/40 rounded text-xs font-semibold cursor-pointer transition-colors"
+                  >
+                    <Sparkles className="w-3.5 h-3.5 text-[#D7AD63]" />
+                    <span>Summon from Veil Archive Vault (Offline Fallback)</span>
                   </button>
                 </div>
               </div>

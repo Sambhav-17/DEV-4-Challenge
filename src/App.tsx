@@ -19,7 +19,7 @@ export default function App() {
   const [activeSection, setActiveSection] = useState<string>('veil');
   const [memories, setMemories] = useState<MemoryRecord[]>([]);
   const [candles, setCandles] = useState<CandleOffering[]>([]);
-  const [showIntro, setShowIntro] = useState<boolean>(false);
+  const [showIntro, setShowIntro] = useState<boolean>(true);
   const [isSoundMuted, setIsSoundMuted] = useState<boolean>(true);
 
   // Modals
@@ -35,16 +35,8 @@ export default function App() {
     setTimeout(() => setToastMessage(null), 3000);
   };
 
-  // Check intro preference & load DB on startup
+  // Load DB on startup
   useEffect(() => {
-    try {
-      const seen = localStorage.getItem('afterlight_intro_seen');
-      if (!seen) {
-        setShowIntro(true);
-      }
-    } catch {
-      setShowIntro(false);
-    }
     loadData();
   }, []);
 
@@ -96,6 +88,7 @@ export default function App() {
         onOpenUnderTheHood={() => setIsUnderTheHoodOpen(true)}
         onOpenTerminal={() => setIsTerminalOpen(true)}
         onOpenLeaveLight={() => setIsLeaveLightOpen(true)}
+        onReplayIntro={() => setShowIntro(true)}
       />
 
       {/* Toast Notification Container */}

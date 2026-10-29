@@ -7,6 +7,7 @@ interface HeaderProps {
   onOpenUnderTheHood: () => void;
   onOpenTerminal: () => void;
   onOpenLeaveLight: () => void;
+  onReplayIntro?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -15,6 +16,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenUnderTheHood,
   onOpenTerminal,
   onOpenLeaveLight,
+  onReplayIntro,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -86,6 +88,18 @@ export const Header: React.FC<HeaderProps> = ({
             <Info className="w-3.5 h-3.5" />
             <span>Judge Guide</span>
           </button>
+
+          {/* Replay Prologue Animation */}
+          {onReplayIntro && (
+            <button
+              onClick={onReplayIntro}
+              className="hidden md:flex items-center gap-1.5 px-2.5 py-1.5 text-xs text-[#D7AD63] bg-[#101624] border border-[#D7AD63]/30 rounded-lg hover:bg-[#18233a] transition-colors cursor-pointer whitespace-nowrap"
+              title="Replay Prologue Cinematic Animation"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-[#D7AD63]" />
+              <span>Prologue</span>
+            </button>
+          )}
 
           {/* Download Source Zip */}
           <a

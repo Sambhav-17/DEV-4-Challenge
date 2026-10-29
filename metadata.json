@@ -1,0 +1,6 @@
+{
+  "name": "AFTERLIGHT — Stories Beyond the Veil",
+  "description": "An intimate 3D digital remembrance universe where memories become light, stories awaken, and open-weight AI preserves human heritage.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
